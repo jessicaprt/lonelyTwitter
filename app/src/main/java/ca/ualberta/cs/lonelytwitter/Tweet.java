@@ -1,5 +1,6 @@
 package ca.ualberta.cs.lonelytwitter;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -9,15 +10,18 @@ import java.util.Date;
 public abstract class Tweet implements Tweetable {
     private String message;
     private Date date;
+    private ArrayList<Mood> moods;
 
     public Tweet(String message) {
         this.message = message;
         this.date = new Date();
+        this.moods = new ArrayList<Mood>();
     }
 
     public Tweet(String message, Date date) {
         this.message = message;
         this.date = date;
+        this.moods = new ArrayList<Mood>();
     }
 
     public void setDate(Date date) {
@@ -38,6 +42,14 @@ public abstract class Tweet implements Tweetable {
 
     public String getMessage() {
         return message;
+    }
+
+    public void setMoods(ArrayList<Mood> moods) {
+        this.moods = moods;
+    }
+
+    public ArrayList<Mood> getMoods() {
+        return moods;
     }
 
     public abstract Boolean isImportant();
