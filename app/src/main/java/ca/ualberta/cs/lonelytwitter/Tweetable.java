@@ -1,5 +1,7 @@
 package ca.ualberta.cs.lonelytwitter;
 
+import java.util.Date;
+
 /**
  * Created by jessicaa on 9/14/17.
  */
