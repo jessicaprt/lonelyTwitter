@@ -3,6 +3,8 @@ package ca.ualberta.cs.lonelytwitter;
 import java.util.ArrayList;
 import java.util.Date;
 
+import static android.R.id.message;
+
 /**
  * Created by jessicaa on 9/14/17.
  */
@@ -53,4 +55,9 @@ public abstract class Tweet implements Tweetable {
     }
 
     public abstract Boolean isImportant();
+
+    @Override
+    public String toString() {
+        return date.toString() + " | " + message;
+    }
 }
