@@ -7,8 +7,14 @@ import com.searchly.jestdroid.DroidClientConfig;
 import com.searchly.jestdroid.JestClientFactory;
 import com.searchly.jestdroid.JestDroidClient;
 
+import java.io.NotActiveException;
+import java.util.ArrayList;
+import java.util.List;
+
 import io.searchbox.core.DocumentResult;
 import io.searchbox.core.Index;
+import io.searchbox.core.Search;
+import io.searchbox.core.SearchResult;
 
 /**
  * Created by romansky on 10/20/16.
@@ -43,17 +49,40 @@ public class ElasticsearchTweetController {
     }
 
     // TODO we need a function which gets tweets from elastic search
-/*    public static class GetTweetsTask extends AsyncTask<String, Void, ArrayList<NormalTweet>> {
+    public static class GetTweetsTask extends AsyncTask<String, Void, ArrayList<NormalTweet>> {
         @Override
         protected ArrayList<NormalTweet> doInBackground(String... search_parameters) {
             verifySettings();
-
+            String query = "{\n" +
+                    " \"query\": {\n" +
+                    "   \"bool\": {\n" +
+                    "     \"must\":[\n" +
+                    "       {\n" +
+                    "         \"wildcard\": {\n" +
+                    "           \"message\": \"*" + search_parameters[0] + "*\"\n" +
+                    "         }\n" +
+                    "       }\n" +
+                    "       ]\n" +
+                    "      }\n" +
+                    " }\n" +
+                    " }";
             ArrayList<NormalTweet> tweets = new ArrayList<NormalTweet>();
 
                 // TODO Build the query
+            Search search = new Search.Builder(query)
+                    .addIndex("testing")
+                    .addType("tweet")
+                    .build();
 
             try {
                // TODO get the results of the query
+                SearchResult result = client.execute(search);
+                if (result.isSucceeded()) {
+                    List<NormalTweet> foundTweets = result.getSourceAsObjectList(NormalTweet.class);
+                    tweets.addAll(foundTweets);
+                } else {
+                    Log.i("Error", "the search query failed to find any tweets that matched");
+                }
             }
             catch (Exception e) {
                 Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
@@ -61,7 +90,12 @@ public class ElasticsearchTweetController {
 
             return tweets;
         }
-    }*/
+
+        @Override
+        protected void onPostExecute(ArrayList<NormalTweet> normalTweets) {
+            super.onPostExecute(normalTweets);
+        }
+    }
 
 
 
