@@ -4,20 +4,16 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
-    <!-- 1. Refactored: added string value "My old tweets
-            this avoids the use of magic values -->
     <TextView
         android:id="@+id/oldTweetsTitle"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/old_tweets" />
+        android:text="My old tweets" />
 
-    <!-- 2. Refactored: changed 263dp to 0dp
-            this changes the performance of the app -->
     <ListView
         android:id="@+id/oldTweetsList"
         android:layout_width="fill_parent"
-        android:layout_height="0dp"
+        android:layout_height="263dp"
         android:layout_weight="1"
         android:scrollbars="vertical" >
 
@@ -28,18 +24,12 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="@string/hello" />
-
-    <!-- refactored by Jessica Prieto
-     3. added android:labelFor="@+id/body"
-     4. added android:hint so that there's a placeholder text before user writes input -->
-
+    
     <EditText
         android:id="@+id/body"
-        android:labelFor="@+id/body"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:scrollbars="horizontal"
-        android:hint="@string/defaultMessage"/>
+        android:scrollbars="horizontal" />
 
     <Button
         android:id="@+id/clear"
