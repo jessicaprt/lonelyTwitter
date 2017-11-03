@@ -7,7 +7,7 @@ import java.util.Date;
  */
 public abstract class Tweet {
     protected String message;
-    private Date date;
+    protected Date date;
 
     public Tweet(String message, Date date) {
         this.message = message;
